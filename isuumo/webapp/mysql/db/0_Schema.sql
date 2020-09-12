@@ -21,7 +21,9 @@ CREATE TABLE isuumo.estate
     rentrange   INTEGER AS (CASE WHEN rent < 50000 THEN 0 WHEN rent < 100000 THEN 1 WHEN rent < 150000 THEN 2 ELSE 3 END),
     door_heightrange   INTEGER AS (CASE WHEN door_height < 80 THEN 0 WHEN door_height < 110 THEN 1 WHEN door_height < 150 THEN 2 ELSE 3 END),
     door_widthrange   INTEGER AS (CASE WHEN door_width < 80 THEN 0 WHEN door_width < 110 THEN 1 WHEN door_width < 150 THEN 2 ELSE 3 END),
-    index idx_all (door_heightrange, door_widthrange, rentrange)
+    index idx_heightrange (door_heightrange),
+    index idx_widthrange (door_widthrange),
+    index idx_rentrange (rentrange)
 );
 
 CREATE TABLE isuumo.chair
@@ -39,8 +41,12 @@ CREATE TABLE isuumo.chair
     kind        VARCHAR(64)     NOT NULL,
     popularity  INTEGER         NOT NULL,
     stock       INTEGER         NOT NULL,
-    index idx_price (price),
-    index idx_height (height),
-    index idx_width (width),
-    index idx_depth (depth)
+    pricerange   INTEGER AS (CASE WHEN price < 3000 THEN 0 WHEN price < 6000 THEN 1 WHEN price < 9000 THEN 2 WHEN price < 12000 THEN 3 WHEN price < 15000 THEN 4 ELSE 5 END),
+    heightrange   INTEGER AS (CASE WHEN height < 80 THEN 0 WHEN height < 110 THEN 1 WHEN height < 150 THEN 2 ELSE 3 END),
+    widthrange   INTEGER AS (CASE WHEN width < 80 THEN 0 WHEN width < 110 THEN 1 WHEN width < 150 THEN 2 ELSE 3 END),
+    depthrange   INTEGER AS (CASE WHEN depth < 80 THEN 0 WHEN depth < 110 THEN 1 WHEN depth < 150 THEN 2 ELSE 3 END),
+    index idx_pricerange (pricerange),
+    index idx_heightrange (heightrange),
+    index idx_widthrange (widthrange),
+    index idx_depthrange (depthrange)
 );
