@@ -23,7 +23,8 @@ CREATE TABLE isuumo.estate
     door_widthrange   INTEGER AS (CASE WHEN door_width < 80 THEN 0 WHEN door_width < 110 THEN 1 WHEN door_width < 150 THEN 2 ELSE 3 END),
     index idx_heightrange (door_heightrange asc, popularity desc, id asc),
     index idx_widthrange (door_widthrange asc, popularity desc, id asc),
-    index idx_rentrange (rentrange asc, popularity desc, id asc)
+    index idx_rentrange (rentrange asc, popularity desc, id asc),
+    index idx_lat (latitude)
 );
 
 CREATE TABLE isuumo.chair
