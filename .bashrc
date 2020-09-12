@@ -167,3 +167,4 @@ stty stop undef
 alias deploy='~/isuumo/webapp/go/script/deploy.sh'
 alias applog='sudo journalctl -f -u isuumo.go'
 
+alias mycnf='sudo cp ~/etc/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf'
