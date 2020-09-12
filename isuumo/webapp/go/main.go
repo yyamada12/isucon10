@@ -18,6 +18,8 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/labstack/gommon/log"
+
+	_ "net/http/pprof"
 )
 
 const Limit = 20
@@ -239,6 +241,11 @@ func init() {
 }
 
 func main() {
+
+	go func() {
+		http.ListenAndServe("localhost:6060", nil)
+	}()
+
 	// Echo instance
 	e := echo.New()
 	e.Debug = true
