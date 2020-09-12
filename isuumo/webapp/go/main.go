@@ -405,23 +405,6 @@ func searchChairs(c echo.Context) error {
 	conditions := make([]string, 0)
 	params := make([]interface{}, 0)
 
-	// if c.QueryParam("priceRangeId") != "" {
-	// 	chairPrice, err := getRange(chairSearchCondition.Price, c.QueryParam("priceRangeId"))
-	// 	if err != nil {
-	// 		c.Echo().Logger.Infof("priceRangeID invalid, %v : %v", c.QueryParam("priceRangeId"), err)
-	// 		return c.NoContent(http.StatusBadRequest)
-	// 	}
-
-	// 	if chairPrice.Min != -1 {
-	// 		conditions = append(conditions, "price >= ?")
-	// 		params = append(params, chairPrice.Min)
-	// 	}
-	// 	if chairPrice.Max != -1 {
-	// 		conditions = append(conditions, "price < ?")
-	// 		params = append(params, chairPrice.Max)
-	// 	}
-	// }
-
 	if c.QueryParam("priceRangeId") != "" {
 		RangeIndex, err := getRangeIndex(chairSearchCondition.Price, c.QueryParam("priceRangeId"))
 		if err != nil {
@@ -432,23 +415,6 @@ func searchChairs(c echo.Context) error {
 		conditions = append(conditions, "pricerange = ?")
 		params = append(params, RangeIndex)
 	}
-
-	// if c.QueryParam("heightRangeId") != "" {
-	// 	chairHeight, err := getRange(chairSearchCondition.Height, c.QueryParam("heightRangeId"))
-	// 	if err != nil {
-	// 		c.Echo().Logger.Infof("heightRangeIf invalid, %v : %v", c.QueryParam("heightRangeId"), err)
-	// 		return c.NoContent(http.StatusBadRequest)
-	// 	}
-
-	// 	if chairHeight.Min != -1 {
-	// 		conditions = append(conditions, "height >= ?")
-	// 		params = append(params, chairHeight.Min)
-	// 	}
-	// 	if chairHeight.Max != -1 {
-	// 		conditions = append(conditions, "height < ?")
-	// 		params = append(params, chairHeight.Max)
-	// 	}
-	// }
 
 	if c.QueryParam("heightRangeId") != "" {
 		RangeIndex, err := getRangeIndex(chairSearchCondition.Height, c.QueryParam("heightRangeId"))
@@ -461,23 +427,6 @@ func searchChairs(c echo.Context) error {
 		params = append(params, RangeIndex)
 	}
 
-	// if c.QueryParam("widthRangeId") != "" {
-	// 	chairWidth, err := getRange(chairSearchCondition.Width, c.QueryParam("widthRangeId"))
-	// 	if err != nil {
-	// 		c.Echo().Logger.Infof("widthRangeID invalid, %v : %v", c.QueryParam("widthRangeId"), err)
-	// 		return c.NoContent(http.StatusBadRequest)
-	// 	}
-
-	// 	if chairWidth.Min != -1 {
-	// 		conditions = append(conditions, "width >= ?")
-	// 		params = append(params, chairWidth.Min)
-	// 	}
-	// 	if chairWidth.Max != -1 {
-	// 		conditions = append(conditions, "width < ?")
-	// 		params = append(params, chairWidth.Max)
-	// 	}
-	// }
-
 	if c.QueryParam("widthRangeId") != "" {
 		RangeIndex, err := getRangeIndex(chairSearchCondition.Width, c.QueryParam("widthRangeId"))
 		if err != nil {
@@ -488,23 +437,6 @@ func searchChairs(c echo.Context) error {
 		conditions = append(conditions, "widthrange = ?")
 		params = append(params, RangeIndex)
 	}
-
-	// if c.QueryParam("depthRangeId") != "" {
-	// 	chairDepth, err := getRange(chairSearchCondition.Depth, c.QueryParam("depthRangeId"))
-	// 	if err != nil {
-	// 		c.Echo().Logger.Infof("depthRangeId invalid, %v : %v", c.QueryParam("depthRangeId"), err)
-	// 		return c.NoContent(http.StatusBadRequest)
-	// 	}
-
-	// 	if chairDepth.Min != -1 {
-	// 		conditions = append(conditions, "depth >= ?")
-	// 		params = append(params, chairDepth.Min)
-	// 	}
-	// 	if chairDepth.Max != -1 {
-	// 		conditions = append(conditions, "depth < ?")
-	// 		params = append(params, chairDepth.Max)
-	// 	}
-	// }
 
 	if c.QueryParam("depthRangeId") != "" {
 		RangeIndex, err := getRangeIndex(chairSearchCondition.Depth, c.QueryParam("depthRangeId"))
