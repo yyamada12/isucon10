@@ -164,3 +164,6 @@ alias pps='go tool pprof -png -output ~/pprof/pprof.png http://localhost:6060/de
 
 stty stop undef
 
+alias deploy='~/isuumo/webapp/go/script/deploy.sh'
+alias applog='sudo journalctl -f -u isuumo.go'
+
