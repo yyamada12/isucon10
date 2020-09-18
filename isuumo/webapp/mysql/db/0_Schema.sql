@@ -18,12 +18,14 @@ CREATE TABLE isuumo.estate
     door_width  INTEGER             NOT NULL,
     features    VARCHAR(64)         NOT NULL,
     popularity  INTEGER             NOT NULL,
+    sort_key  BIGINT AS (popularity * (-100000) + id),
     rentrange   INTEGER AS (CASE WHEN rent < 50000 THEN 0 WHEN rent < 100000 THEN 1 WHEN rent < 150000 THEN 2 ELSE 3 END),
     door_heightrange   INTEGER AS (CASE WHEN door_height < 80 THEN 0 WHEN door_height < 110 THEN 1 WHEN door_height < 150 THEN 2 ELSE 3 END),
     door_widthrange   INTEGER AS (CASE WHEN door_width < 80 THEN 0 WHEN door_width < 110 THEN 1 WHEN door_width < 150 THEN 2 ELSE 3 END),
-    index idx_heightrange (door_heightrange asc, popularity desc, id asc),
-    index idx_widthrange (door_widthrange asc, popularity desc, id asc),
-    index idx_rentrange (rentrange asc, popularity desc, id asc),
+    index idx_heightrange (door_heightrange , sort_key),
+    index idx_widthrange (door_widthrange , sort_key),
+    index idx_rentrange (rentrange , sort_key),
+    index idx_sort_key (sort_key),
     index idx_lat (latitude)
 );
 
