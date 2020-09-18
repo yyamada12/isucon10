@@ -105,6 +105,10 @@ max_binlog_size   = 100M
 # ssl-key=/etc/mysql/server-key.pem
 max_allowed_packet = 32505856
 
+[mysqld]
+slow_query_log = 1
+slow_query_log_file = /var/log/mysql/slow.log
+long_query_time = 0
 
 innodb_buffer_pool_size=1500M
 innodb_flush_log_at_trx_commit=0
