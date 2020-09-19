@@ -738,6 +738,17 @@ func searchEstates(c echo.Context) error {
 	conditions := make([]string, 0)
 	params := make([]interface{}, 0)
 
+	if c.QueryParam("rentRangeId") != "" {
+		RangeIndex, err := getRangeIndex(estateSearchCondition.Rent, c.QueryParam("rentRangeId"))
+		if err != nil {
+			c.Echo().Logger.Infof("rentRangeId invalid, %v : %v", c.QueryParam("rentRangeId"), err)
+			return c.NoContent(http.StatusBadRequest)
+		}
+
+		conditions = append(conditions, "rentrange = ?")
+		params = append(params, RangeIndex)
+	}
+
 	if c.QueryParam("doorHeightRangeId") != "" {
 		RangeIndex, err := getRangeIndex(estateSearchCondition.DoorHeight, c.QueryParam("doorHeightRangeId"))
 		if err != nil {
@@ -757,17 +768,6 @@ func searchEstates(c echo.Context) error {
 		}
 
 		conditions = append(conditions, "door_widthrange = ?")
-		params = append(params, RangeIndex)
-	}
-
-	if c.QueryParam("rentRangeId") != "" {
-		RangeIndex, err := getRangeIndex(estateSearchCondition.Rent, c.QueryParam("rentRangeId"))
-		if err != nil {
-			c.Echo().Logger.Infof("rentRangeId invalid, %v : %v", c.QueryParam("rentRangeId"), err)
-			return c.NoContent(http.StatusBadRequest)
-		}
-
-		conditions = append(conditions, "rentrange = ?")
 		params = append(params, RangeIndex)
 	}
 
