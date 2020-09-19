@@ -46,6 +46,7 @@ CREATE TABLE isuumo.chair
     kind        VARCHAR(64)     NOT NULL,
     popularity  INTEGER         NOT NULL,
     stock       INTEGER         NOT NULL,
+    sort_key  BIGINT AS (popularity * (-100000) + id)  NOT NULL,
     pricerange   INTEGER AS (CASE WHEN price < 3000 THEN 0 WHEN price < 6000 THEN 1 WHEN price < 9000 THEN 2 WHEN price < 12000 THEN 3 WHEN price < 15000 THEN 4 ELSE 5 END),
     heightrange   INTEGER AS (CASE WHEN height < 80 THEN 0 WHEN height < 110 THEN 1 WHEN height < 150 THEN 2 ELSE 3 END),
     widthrange   INTEGER AS (CASE WHEN width < 80 THEN 0 WHEN width < 110 THEN 1 WHEN width < 150 THEN 2 ELSE 3 END),
@@ -53,5 +54,6 @@ CREATE TABLE isuumo.chair
     index idx_pricerange (pricerange),
     index idx_heightrange (heightrange),
     index idx_widthrange (widthrange),
-    index idx_depthrange (depthrange)
+    index idx_depthrange (depthrange),
+    index idx_sort_key (sort_key)
 );
