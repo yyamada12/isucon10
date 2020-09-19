@@ -53,10 +53,10 @@ CREATE TABLE isuumo.chair
     heightrange   INTEGER AS (CASE WHEN height < 80 THEN 0 WHEN height < 110 THEN 1 WHEN height < 150 THEN 2 ELSE 3 END),
     widthrange   INTEGER AS (CASE WHEN width < 80 THEN 0 WHEN width < 110 THEN 1 WHEN width < 150 THEN 2 ELSE 3 END),
     depthrange   INTEGER AS (CASE WHEN depth < 80 THEN 0 WHEN depth < 110 THEN 1 WHEN depth < 150 THEN 2 ELSE 3 END),
-    index idx_pricerange (pricerange),
-    index idx_heightrange (heightrange),
-    index idx_widthrange (widthrange),
-    index idx_depthrange (depthrange),
+    index idx_pricerange (pricerange, stock),
+    index idx_heightrange (heightrange, stock),
+    index idx_widthrange (widthrange, stock),
+    index idx_depthrange (depthrange, stock),
     index idx_price_id (price, id),
     index idx_sort_key (sort_key)
 );
