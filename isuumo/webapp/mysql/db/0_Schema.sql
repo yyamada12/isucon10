@@ -27,6 +27,7 @@ CREATE TABLE isuumo.estate
     index idx_heightrange (door_heightrange , sort_key),
     index idx_widthrange (door_widthrange , sort_key),
     index idx_rentrange (rentrange , sort_key),
+    index idx_rent_id (rent, id),
     index idx_sort_key (sort_key),
     index idx_lat (latitude)
 );
@@ -55,5 +56,6 @@ CREATE TABLE isuumo.chair
     index idx_heightrange (heightrange),
     index idx_widthrange (widthrange),
     index idx_depthrange (depthrange),
+    index idx_price_id (price, id),
     index idx_sort_key (sort_key)
 );
