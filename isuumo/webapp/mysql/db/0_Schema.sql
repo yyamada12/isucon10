@@ -57,6 +57,7 @@ CREATE TABLE isuumo.chair
     index idx_heightrange (heightrange, stock),
     index idx_widthrange (widthrange, stock),
     index idx_depthrange (depthrange, stock),
+    index idx_kind (kind, stock),
     index idx_price_id (price, id),
     index idx_sort_key (sort_key)
 );
