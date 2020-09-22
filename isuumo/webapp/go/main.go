@@ -13,6 +13,9 @@ import (
 	"strconv"
 	"strings"
 
+	mw "github.com/dafiti/echo-middleware"
+	newrelic "github.com/newrelic/go-agent"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 	"github.com/labstack/echo"
@@ -256,6 +259,15 @@ func main() {
 	// Echo instance
 	e := echo.New()
 
+	// new relic
+	nrConf := newrelic.NewConfig("isucon10", os.Getenv("NEW_RELIC_LICENSE_KEY"))
+	newRelicApp, err := newrelic.NewApplication(nrConf)
+	if err != nil {
+		panic(err)
+	}
+
+	e.Use(mw.NewRelicWithApplication(newRelicApp))
+
 	// Initialize
 	e.POST("/initialize", initialize)
 
@@ -279,7 +291,6 @@ func main() {
 
 	mySQLConnectionData = NewMySQLConnectionEnv()
 
-	var err error
 	db, err = mySQLConnectionData.ConnectDB()
 	if err != nil {
 		e.Logger.Fatalf("DB connection failed : %v", err)
